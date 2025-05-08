@@ -1,0 +1,72 @@
+{
+    "disk_config": {
+        "config_type": "manual_partitioning",
+        "disks": {
+            "/dev/nvme0n1": {
+                "partitions": [
+                    {
+                        "mountpoint": "/boot",
+                        "filesystem": "vfat",
+                        "start": "1MiB",
+                        "size": "512MiB",
+                        "flags": ["esp"]
+                    },
+                    {
+                        "mountpoint": "/",
+                        "filesystem": "btrfs",
+                        "start": "after",
+                        "size": "166GiB",
+                        "encrypted": true,
+                        "subvolumes": [
+                            {
+                                "mountpoint": "/",
+                                "path": "@"
+                            },
+                            {
+                                "mountpoint": "/home",
+                                "path": "@home"
+                            }
+                        ],
+                        "mount_options": ["compress=zstd"]
+                    },
+                    {
+                        "mountpoint": "none",
+                        "filesystem": "swap",
+                        "start": "after",
+                        "size": "4GiB"
+                    }
+                ]
+            }
+        }
+    },
+    "general_config": {
+        "hostname": "archbox",
+        "locale_config": {
+            "kb_layout": "us",
+            "sys_language": "en_US.UTF-8",
+            "sys_encoding": "UTF-8",
+            "timezone": "US/Central"
+        },
+        "mirror_config": {
+            "mirror_regions": ["United States"]
+        }
+    },
+    "package_config": {
+        "additional_packages": ["base-devel", "gnome", "gnome-extra"],
+        "services": ["gdm", "NetworkManager", "ntp"]
+    },
+    "bootloader": {
+        "type": "grub",
+        "install": true
+    },
+    "user_config": {
+        "root_password": "!secret root_password",
+        "users": [
+            {
+                "username": "archer",
+                "password": "!secret archer_password",
+                "sudo": true
+            }
+        ]
+    }
+}
