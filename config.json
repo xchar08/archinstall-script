@@ -19,7 +19,7 @@ cat > /root/config.json << 'EOF'
   "profile_config": { "profile": { "main": "Server", "details": [], "custom_settings": {} } },
   "disk_config": {
     "config_type": "manual_partitioning",
-    "device": "/dev/sda",
+    "device": "/dev/nvme0n1",
     "wipe": true,
     "partitions": [
       {
@@ -36,12 +36,13 @@ cat > /root/config.json << 'EOF'
           "cipher":       "aes-xts-plain64",
           "key_size":     512
         },
-        "fs_type": "btrfs",
-        "start":  "513MiB",
-        "length": "150GiB",
-        "options": ["compress=zstd"],
+        "fs_type":    "btrfs",
+        "start":      "513MiB",
+        "length":     "150GiB",
+        "mountpoint": "/",                <── Mount root here
+        "options":    ["compress=zstd"],
         "subvolumes": {
-          "@":     { "mountpoint": "/" },
+          "@":     { "mountpoint": "/"    },
           "@home": { "mountpoint": "/home" }
         },
         "status": "create"
