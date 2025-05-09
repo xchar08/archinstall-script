@@ -22,12 +22,33 @@
   },
   "ntp": true,
   "profile_config": {
-    "gfx_driver": "All open-source",
-    "greeter": "gdm",
     "profile": {
-      "custom_settings": { "Gnome": {} },
-      "details": [ "Gnome" ],
-      "main": "Desktop"
+      "main": "Server",
+      "details": [],
+      "custom_settings": {}
+    }
+  },
+  "disk_config": {
+    "disk": "/dev/sda",
+    "wipe": true,
+    "efi_size": "512M",
+    "root_size": "150G",
+    "swap_size": "8G",
+    "filesystem": "btrfs",
+    "luks": {
+      "password": "root_enc_password",
+      "cipher": "aes-xts-plain64",
+      "key_size": 512
+    },
+    "subvolumes": {
+      "@": {
+        "mountpoint": "/",
+        "options": ["compress=zstd"]
+      },
+      "@home": {
+        "mountpoint": "/home",
+        "options": ["compress=zstd"]
+      }
     }
   },
   "script": "guided",
