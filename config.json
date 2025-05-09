@@ -9,7 +9,9 @@ cat > /root/config.json << 'EOF'
   "mirror_config": {
     "custom_mirrors": [],
     "mirror_regions": {
-      "United States": ["https://mirror.arizona.edu/archlinux/\$repo/os/\$arch"]
+      "United States": [
+        "https://mirror.arizona.edu/archlinux/$repo/os/$arch"
+      ]
     }
   },
   "network_config": { "type": "nm" },
