@@ -1,4 +1,11 @@
 {
-    "root_password": "your_root_password_here",
-    "archer_password": "your_archer_password_here"
+  "!encryption-password": "YourLUKSPasswordHere",
+  "root_enc_password": "YourRootPasswordHere",
+  "users": [
+    {
+      "username": "alice",
+      "enc_password": "YourUserPasswordHash",
+      "sudo": true
+    }
+  ]
 }
