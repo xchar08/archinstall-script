@@ -3,9 +3,7 @@
   "archinstall-language": "English",
   "bootloader": "GRUB",
   "hostname": "archpc",
-  "kernels": [
-    "linux"
-  ],
+  "kernels": ["linux"],
   "locale_config": {
     "kb_layout": "us",
     "sys_lang": "en_US.UTF-8",
@@ -50,95 +48,10 @@
           "key_size": 512
         },
         "filesystem": "btrfs",
-        "options": [
-          "compress=zstd"
-        ],
+        "options": ["compress=zstd"],
         "subvolumes": {
-          "@": {
-            "mountpoint": "/"
-          },
-          "@home": {
-            "mountpoint": "/home"
-          }
-        }
-      },
-      {
-        "part_type": "luks",
-        "size": "8G",
-        "luks": {
-          "password_key": "root_enc_password",
-          "cipher": "aes-xts-plain64",
-          "key_size": 512
-        },
-        "filesystem": "swap"
-      }
-    ]
-  },
-  "script": "guided",
-  "timezone": "America/Chicago"
-}
-{
-  "additional-repositories": [],
-  "archinstall-language": "English",
-  "bootloader": "GRUB",
-  "hostname": "archpc",
-  "kernels": [
-    "linux"
-  ],
-  "locale_config": {
-    "kb_layout": "us",
-    "sys_lang": "en_US.UTF-8",
-    "sys_enc": "UTF-8"
-  },
-  "mirror_config": {
-    "custom_mirrors": [],
-    "mirror_regions": {
-      "United States": [
-        "https://mirror.arizona.edu/archlinux/$repo/os/$arch"
-      ]
-    }
-  },
-  "network_config": {
-    "type": "nm"
-  },
-  "ntp": true,
-  "profile_config": {
-    "profile": {
-      "main": "Server",
-      "details": [],
-      "custom_settings": {}
-    }
-  },
-  "disk_config": {
-    "config_type": "layout",
-    "device": "/dev/sda",
-    "wipe": true,
-    "partitions": [
-      {
-        "part_type": "efi",
-        "size": "512M",
-        "filesystem": "fat32",
-        "mountpoint": "/boot/efi"
-      },
-      {
-        "part_type": "luks",
-        "size": "150G",
-        "luks": {
-          "password_key": "root_enc_password",
-          "cipher": "aes-xts-plain64",
-          "key_size": 512
-        },
-        "filesystem": "btrfs",
-        "options": [
-          "compress=zstd"
-        ],
-        "subvolumes": {
-          "@": {
-            "mountpoint": "/"
-          },
-          "@home": {
-            "mountpoint": "/home"
-          }
+          "@":    { "mountpoint": "/" },
+          "@home": { "mountpoint": "/home" }
         }
       },
       {
