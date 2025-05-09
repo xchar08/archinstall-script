@@ -1,57 +1,40 @@
-{
-  "additional-repositories": [],
-  "archinstall-language": "English",
-  "bootloader": "GRUB",
-  "hostname": "archpc",
-  "kernels": ["linux"],
-  "locale_config": {
-    "kb_layout": "us",
-    "sys_lang": "en_US.UTF-8",
-    "sys_enc": "UTF-8"
-  },
-  "mirror_config": {
-    "custom_mirrors": [],
-    "mirror_regions": {
-      "United States": [
-        "https://mirror.arizona.edu/archlinux/$repo/os/$arch"
+"disk_config": {
+  "config_type": "manual_partitioning",
+  "device_modifications": [
+    {
+      "device": "/dev/sda",
+      "wipe": false,
+      "partitions": [
+        {
+        "btrfs": [],
+        "flags": ["esp", "boot"],
+        "fs_type": "fat32",
+        "length": {"unit": "MiB", "value": 512},
+        "mount_options": [],
+        "mountpoint": "/boot/efi",
+        "obj_id": "bd85ddfc-d0ad-45d9-9731-8aac3e177579",
+        "start": {"unit": "MiB", "value": 1},
+        "status": "create",
+        "type": "primary"
+        },
+        {
+        "btrfs": {
+        "subvolumes": [
+        {"name": "@", "mountpoint": "/", "compress": true, "nodatacow": false},
+        {"name": "@home", "mountpoint": "/home", "compress": true, "nodatacow": false}
+        ]
+        },
+          "flags": [],
+          "fs_type": "btrfs",
+          "length": {"unit": "MiB", "value": 153600},
+          "mount_options": ["compress=zstd"],
+          "mountpoint": null,
+          "obj_id": "a562b778-4a7e-4380-a33e-a167b5df9d19",
+          "start": {"unit": "MiB", "value": 513},
+          "status": "create",
+          "type": "primary"
+        }
       ]
     }
-  },
-  "network_config": {
-    "type": "nm"
-  },
-  "ntp": true,
-  "profile_config": {
-    "profile": {
-      "main": "Server",
-      "details": [],
-      "custom_settings": {}
-    }
-  },
-  "disk_config": {
-    "disk": "/dev/sda",
-    "wipe": true,
-    "efi_size": "512M",
-    "root_size": "150G",
-    "swap_size": "8G",
-    "filesystem": "btrfs",
-    "luks": {
-      "password": "root_enc_password",
-      "cipher": "aes-xts-plain64",
-      "key_size": 512
-    },
-    "subvolumes": {
-      "@": {
-        "mountpoint": "/",
-        "options": ["compress=zstd"]
-      },
-      "@home": {
-        "mountpoint": "/home",
-        "options": ["compress=zstd"]
-      }
-    }
-  },
-  "script": "guided",
-  "swap": true,
-  "timezone": "America/Chicago"
+  ]
 }
