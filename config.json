@@ -39,7 +39,7 @@ cat > /root/config.json << 'EOF'
         "fs_type":    "btrfs",
         "start":      "513MiB",
         "length":     "150GiB",
-        "mountpoint": "/",                <── Mount root here
+        "mountpoint": "/",                
         "options":    ["compress=zstd"],
         "subvolumes": {
           "@":     { "mountpoint": "/"    },
