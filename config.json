@@ -1,40 +1,64 @@
-"disk_config": {
-  "config_type": "manual_partitioning",
-  "device_modifications": [
-    {
-      "device": "/dev/sda",
-      "wipe": false,
-      "partitions": [
-        {
-        "btrfs": [],
-        "flags": ["esp", "boot"],
-        "fs_type": "fat32",
-        "length": {"unit": "MiB", "value": 512},
-        "mount_options": [],
-        "mountpoint": "/boot/efi",
-        "obj_id": "bd85ddfc-d0ad-45d9-9731-8aac3e177579",
-        "start": {"unit": "MiB", "value": 1},
-        "status": "create",
-        "type": "primary"
-        },
-        {
-        "btrfs": {
-        "subvolumes": [
-        {"name": "@", "mountpoint": "/", "compress": true, "nodatacow": false},
-        {"name": "@home", "mountpoint": "/home", "compress": true, "nodatacow": false}
+{
+  "disk_config": {
+    "config_type": "manual_partitioning",
+    "device_modifications": [
+      {
+        "device": "/dev/sda",
+        "wipe": false,
+        "partitions": [
+          {
+            "btrfs": [],
+            "flags": ["esp", "boot"],
+            "fs_type": "fat32",
+            "length": {
+              "unit": "MiB",
+              "value": 512
+            },
+            "mount_options": [],
+            "mountpoint": "/boot/efi",
+            "obj_id": "bd85ddfc-d0ad-45d9-9731-8aac3e177579",
+            "start": {
+              "unit": "MiB",
+              "value": 1
+            },
+            "status": "create",
+            "type": "primary"
+          },
+          {
+            "btrfs": {
+              "subvolumes": [
+                {
+                  "name": "@",
+                  "mountpoint": "/",
+                  "compress": true,
+                  "nodatacow": false
+                },
+                {
+                  "name": "@home",
+                  "mountpoint": "/home",
+                  "compress": true,
+                  "nodatacow": false
+                }
+              ]
+            },
+            "flags": [],
+            "fs_type": "btrfs",
+            "length": {
+              "unit": "MiB",
+              "value": 153600
+            },
+            "mount_options": ["compress=zstd"],
+            "mountpoint": null,
+            "obj_id": "a562b778-4a7e-4380-a33e-a167b5df9d19",
+            "start": {
+              "unit": "MiB",
+              "value": 513
+            },
+            "status": "create",
+            "type": "primary"
+          }
         ]
-        },
-          "flags": [],
-          "fs_type": "btrfs",
-          "length": {"unit": "MiB", "value": 153600},
-          "mount_options": ["compress=zstd"],
-          "mountpoint": null,
-          "obj_id": "a562b778-4a7e-4380-a33e-a167b5df9d19",
-          "start": {"unit": "MiB", "value": 513},
-          "status": "create",
-          "type": "primary"
-        }
-      ]
-    }
-  ]
+      }
+    ]
+  }
 }
