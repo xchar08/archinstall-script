@@ -1,79 +1,49 @@
-{
-  "additional-repositories": [],
-  "archinstall-language": "English",
-  "bootloader": "GRUB",
-  "hostname": "archpc",
-  "kernels": ["linux"],
-  "locale_config": {
-    "kb_layout": "us",
-    "sys_lang": "en_US.UTF-8",
-    "sys_enc": "UTF-8"
-  },
-  "mirror_config": {
-    "custom_mirrors": [],
-    "mirror_regions": {
-      "United States": [
-        "https://mirror.arizona.edu/archlinux/$repo/os/$arch"
+"disk_config": {
+  "config_type": "manual_partitioning",
+  "device_modifications": [
+    {
+      "device": "/dev/sda",
+      "wipe": true,
+      "partitions": [
+        {
+          "flags": ["esp", "boot"],
+          "fs_type": "fat32",
+          "length": { "unit": "MiB", "value": 512, "sector_size": 512 },
+          "start":  { "unit": "MiB", "value":   1, "sector_size": 512 },
+          "mountpoint": "/boot/efi",
+          "type": "primary",
+          "status": "create"
+        },
+        {
+          "luks": {
+            "password_key": "root_enc_password",
+            "cipher": "aes-xts-plain64",
+            "key_size": 512
+          },
+          "fs_type": "btrfs",
+          "length": { "unit": "MiB", "value":153600, "sector_size": 512 },
+          "start":  { "unit": "MiB", "value":  513, "sector_size": 512 },
+          "options": ["compress=zstd"],
+          "subvolumes": {
+            "@":     { "mountpoint": "/" },
+            "@home": { "mountpoint": "/home" }
+          },
+          "type": "primary",
+          "status": "create"
+        },
+        {
+          "luks": {
+            "password_key": "root_enc_password",
+            "cipher": "aes-xts-plain64",
+            "key_size": 512
+          },
+          "fs_type": "swap",
+          "length": { "unit": "MiB", "value": 8192, "sector_size": 512 },
+          "start":  { "unit": "MiB", "value":154113, "sector_size": 512 },
+          "type": "primary",
+          "status": "create"
+        }
       ]
     }
-  },
-  "network_config": {
-    "type": "nm"
-  },
-  "ntp": true,
-  "profile_config": {
-    "profile": {
-      "main": "Server",
-      "details": [],
-      "custom_settings": {}
-    }
-  },
-  "disk_config": {
-    "config_type": "manual_partitioning",
-    "device_modifications": [
-      {
-        "device": "/dev/sda",
-        "wipe": true,
-        "partitions": [
-          {
-            "flags": ["esp","boot"],
-            "fs_type": "fat32",
-            "length": { "unit": "MiB","value": 512,"sector_size": 512 },
-            "start":  { "unit": "MiB","value":   1,"sector_size": 512 },
-            "mountpoint": "/boot/efi",
-            "type": "primary"
-          },
-          {
-            "luks": {
-              "password_key": "root_enc_password",
-              "cipher": "aes-xts-plain64",
-              "key_size": 512
-            },
-            "fs_type": "btrfs",
-            "length": { "unit": "MiB","value":153600,"sector_size": 512 },
-            "start":  { "unit": "MiB","value":  513,"sector_size": 512 },
-            "options": ["compress=zstd"],
-            "subvolumes": {
-              "@":     { "mountpoint": "/" },
-              "@home": { "mountpoint": "/home" }
-            },
-            "type": "primary"
-          },
-          {
-            "luks": {
-              "password_key": "root_enc_password",
-              "cipher": "aes-xts-plain64",
-              "key_size": 512
-            },
-            "fs_type": "swap",
-            "length": { "unit": "MiB","value": 8192,"sector_size": 512 },
-            "start":  { "unit": "MiB","value":154113,"sector_size": 512 },
-            "type": "primary"
-          }
-        ]
-      }
-    ]
-  },
-  "script": "guided",
-  "timezone": "America/Chicago"
+  ]
 }
