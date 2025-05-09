@@ -50,10 +50,10 @@
         "fs_type": "btrfs",
         "start": "513MiB",
         "length": "150GiB",
-        "mountpoint": "/",
+        "mountpoint": null,
         "options": ["compress=zstd"],
         "subvolumes": [
-          { "name": "@" },
+          { "name": "@", "mountpoint": "/" },
           { "name": "@home", "mountpoint": "/home" }
         ],
         "status": "create"
