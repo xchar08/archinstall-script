@@ -36,18 +36,10 @@
         "wipe": true,
         "partitions": [
           {
-            "flags": ["esp", "boot"],
+            "flags": ["esp","boot"],
             "fs_type": "fat32",
-            "length": {
-              "unit": "MiB",
-              "value": 512,
-              "sector_size": 512
-            },
-            "start": {
-              "unit": "MiB",
-              "value": 1,
-              "sector_size": 512
-            },
+            "length": { "unit": "MiB","value": 512,"sector_size": 512 },
+            "start":  { "unit": "MiB","value":   1,"sector_size": 512 },
             "mountpoint": "/boot/efi",
             "type": "primary"
           },
@@ -58,19 +50,11 @@
               "key_size": 512
             },
             "fs_type": "btrfs",
-            "length": {
-              "unit": "MiB",
-              "value": 153600,
-              "sector_size": 512
-            },
-            "start": {
-              "unit": "MiB",
-              "value": 513,
-              "sector_size": 512
-            },
+            "length": { "unit": "MiB","value":153600,"sector_size": 512 },
+            "start":  { "unit": "MiB","value":  513,"sector_size": 512 },
             "options": ["compress=zstd"],
             "subvolumes": {
-              "@":    { "mountpoint": "/" },
+              "@":     { "mountpoint": "/" },
               "@home": { "mountpoint": "/home" }
             },
             "type": "primary"
@@ -82,16 +66,8 @@
               "key_size": 512
             },
             "fs_type": "swap",
-            "length": {
-              "unit": "MiB",
-              "value": 8192,
-              "sector_size": 512
-            },
-            "start": {
-              "unit": "MiB",
-              "value": 154113,
-              "sector_size": 512
-            },
+            "length": { "unit": "MiB","value": 8192,"sector_size": 512 },
+            "start":  { "unit": "MiB","value":154113,"sector_size": 512 },
             "type": "primary"
           }
         ]
