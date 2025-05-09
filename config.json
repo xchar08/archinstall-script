@@ -1,11 +1,14 @@
-cat > /root/config.json << 'EOF'
 {
   "additional-repositories": [],
   "archinstall-language": "English",
   "bootloader": "GRUB",
   "hostname": "archpc",
   "kernels": ["linux"],
-  "locale_config": { "kb_layout": "us", "sys_lang": "en_US.UTF-8", "sys_enc": "UTF-8" },
+  "locale_config": {
+    "kb_layout": "us",
+    "sys_lang": "en_US.UTF-8",
+    "sys_enc": "UTF-8"
+  },
   "mirror_config": {
     "custom_mirrors": [],
     "mirror_regions": {
@@ -14,18 +17,26 @@ cat > /root/config.json << 'EOF'
       ]
     }
   },
-  "network_config": { "type": "nm" },
+  "network_config": {
+    "type": "nm"
+  },
   "ntp": true,
-  "profile_config": { "profile": { "main": "Server", "details": [], "custom_settings": {} } },
+  "profile_config": {
+    "profile": {
+      "main": "Server",
+      "details": [],
+      "custom_settings": {}
+    }
+  },
   "disk_config": {
     "config_type": "manual_partitioning",
     "device": "/dev/nvme0n1",
     "wipe": true,
     "partitions": [
       {
-        "flags": ["esp","boot"],
+        "flags": ["esp", "boot"],
         "fs_type": "fat32",
-        "start":  "1MiB",
+        "start": "1MiB",
         "length": "512MiB",
         "mountpoint": "/boot/efi",
         "status": "create"
@@ -33,33 +44,32 @@ cat > /root/config.json << 'EOF'
       {
         "luks": {
           "password_key": "root_enc_password",
-          "cipher":       "aes-xts-plain64",
-          "key_size":     512
+          "cipher": "aes-xts-plain64",
+          "key_size": 512
         },
-        "fs_type":    "btrfs",
-        "start":      "513MiB",
-        "length":     "150GiB",
-        "mountpoint": "/",                
-        "options":    ["compress=zstd"],
-        "subvolumes": {
-          "@":     { "mountpoint": "/"    },
-          "@home": { "mountpoint": "/home" }
-        },
+        "fs_type": "btrfs",
+        "start": "513MiB",
+        "length": "150GiB",
+        "mountpoint": "/",  
+        "options": ["compress=zstd"],
+        "subvolumes": [
+          { "name": "@", "mountpoint": "/" },
+          { "name": "@home", "mountpoint": "/home" }
+        ],
         "status": "create"
       },
       {
         "luks": {
           "password_key": "root_enc_password",
-          "cipher":       "aes-xts-plain64",
-          "key_size":     512
+          "cipher": "aes-xts-plain64",
+          "key_size": 512
         },
         "fs_type": "swap",
-        "length":  "8GiB",
-        "status":  "create"
+        "length": "8GiB",
+        "status": "create"
       }
     ]
   },
   "script": "guided",
   "timezone": "America/Chicago"
 }
-EOF
